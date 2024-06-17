@@ -47,7 +47,7 @@ router.post("/", (req, res) => {
 
 // PUT request: Update the details of a friend with email id
 router.put("/:email", (req, res) => {
-  const email = req.body.email;
+  const email = req.params.email;
   let friend = friends[email];
   if (friend) {
     let firstName = req.body.firstName;
@@ -73,11 +73,11 @@ router.put("/:email", (req, res) => {
 
 // DELETE request: Delete a friend by email id
 router.delete("/:email", (req, res) => {
-  const email = req.body.email;
+  const email = req.params.email;
   let friend = friends[email];
   const name = friend.firstName;
   if (friend) {
-    delete friend;
+    delete friends[email];
     res.status(200).send(`Friend with name ${name} was deleted`);
   } else res.status(404).send("Friend not found!");
 });
